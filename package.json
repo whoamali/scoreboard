@@ -1,0 +1,33 @@
+{
+  "name": "scoreboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:whoamali/scoreboard.git",
+  "author": "| Ali soleymani | <alisoleimani199@gmail.com>",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.0",
+    "axios": "^0.26.1",
+    "i18next": "^21.6.14",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.28.0",
+    "react-i18next": "^11.15.7",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "6",
+    "tailwindcss": "^3.0.23"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
+  }
+}
