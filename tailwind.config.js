@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/pages/**/*.{html,js}", "./src/components/**/*.{html,js}"],
+  content: ["./src/pages/**/*.{html,jsx,tsx}", "./src/components/**/*.{html,jsx,tsx}"],
   theme: {
     fontFamily: {
       Fredoka: ["Fredoka", "sans-serif"],
