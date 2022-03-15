@@ -20,7 +20,6 @@
       "~shared/*": ["src/components/*"],
       "~hooks/*": ["src/hooks/*"],
       "~slices/*": ["src/slices/*"],
-      "~store/*": ["src/core/store/*"],
       "~assets/*": ["src/assets/*"]
     }
   },
