@@ -7,8 +7,8 @@ import "./core/localization";
 
 import App from "./pages/App";
 
-import "./assets/css/app.css"
-import "./assets/scss/app.scss"
+import "./assets/css/app.css";
+import "./assets/scss/app.scss";
 
 ReactDOM.render(
   <React.StrictMode>
