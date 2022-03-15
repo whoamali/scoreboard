@@ -1,1 +1,1 @@
-export {} from ""
+export { default as Home } from "./Home";
