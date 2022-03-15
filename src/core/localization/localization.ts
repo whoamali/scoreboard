@@ -19,4 +19,4 @@ i18n.services.formatter!.add("unitless", (value: string, lng, _options) => {
   return value;
 });
 
-export type ResourcesType = typeof fa;
+export type ResourcesType = typeof en;

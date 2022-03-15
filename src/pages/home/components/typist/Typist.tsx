@@ -1,9 +1,16 @@
+import { useTranslation } from "react-i18next";
 import TextTypist from "react-text-typist";
 
 export default function Typist() {
+  const { t } = useTranslation();
+
   return (
     <TextTypist
-      sentences={["Completely Free", "Fast and Optimal", "Easy to use"]}
+      sentences={[
+        t("app.home.typist.completely-free"),
+        t("app.home.typist.fast-and-optimal"),
+        t("app.home.typist.easy-to-use"),
+      ]}
       cursorBlinkSpeed={500}
       cursorClassName={"text-orange-600"}
       typingSpeed={100}
