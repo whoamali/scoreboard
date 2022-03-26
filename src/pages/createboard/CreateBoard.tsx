@@ -4,6 +4,8 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { createBoard } from '../../slice/boardSlice'
 import {
   TextField,
   TextFieldTitle,
@@ -21,6 +23,7 @@ type Inputs = {
 
 export default function CreateBoard() {
   const { t } = useTranslation();
+  const dispatch = useDispatch()
   let navigate = useNavigate();
   const {
     register,
@@ -30,13 +33,9 @@ export default function CreateBoard() {
 
   const onSubmit: SubmitHandler<Inputs> = data => {
     console.log("data => ", data);
-    console.log("errors => ", errors);
+    dispatch(createBoard(data))
     navigate("/player");
   };
-
-  React.useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <main>
