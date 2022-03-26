@@ -18,7 +18,7 @@ export default function Home() {
       <section className="flex flex-row items-center justify-between w-[510px] h-[55px]">
         <Button
           link="/createboard"
-          className="border-2 border-orange-600 rounded-lg bg-orange-600 text-white font-[400] text-xl font-Fredoka w-60 h-full"
+          className="border-2 border-orange-600 rounded-lg bg-orange-600 text-white font-normal text-xl font-Fredoka w-[240px] h-full"
         >
           <>
             {t("app.create")} {t("app.board")}{" "}
@@ -27,7 +27,7 @@ export default function Home() {
         </Button>
         <Button
           link="/us"
-          className="border-2 border-slate-900 rounded-lg text-slate-900 text-xl font-Fredoka w-60 h-full hover:bg-slate-900 hover:text-white transition"
+          className="border-2 border-slate-900 rounded-lg text-slate-900 text-xl font-Fredoka w-[240px] h-full hover:bg-slate-900 hover:text-white transition"
         >
           {t("app.home.button.about-us")}
         </Button>
