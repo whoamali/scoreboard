@@ -49,7 +49,7 @@ export default function CreateBoard() {
             placeholder={t("app.createboard.title-placeholder")}
           />
           {errors.title && (
-            <TextFieldError content={"This field is required"} />
+            <TextFieldError content={t("app.createboard.title-required-error")} />
           )}
         </div>
         <div className="my-5">

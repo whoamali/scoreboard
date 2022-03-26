@@ -13,6 +13,7 @@ export default {
 
     "app.createboard.title-label": "title",
     "app.createboard.title-placeholder": "scoreboard",
+    "app.createboard.title-required-error": "this field is required",
     "app.createboard.discription-label": "discription (optional)",
     "app.createboard.discription-discription": "your scoreboard discription",
     "app.createboard.discription-placeholder": "discription",
