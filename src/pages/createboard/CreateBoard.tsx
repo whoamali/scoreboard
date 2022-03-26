@@ -1,26 +1,56 @@
+import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   TextFieldTitle,
   TextFieldDiscription,
   Button,
+  TextFieldError,
 } from "./components";
+
+type Inputs = {
+  title: string;
+  discription: string | undefined;
+  players: number;
+  unit: string;
+};
 
 export default function CreateBoard() {
   const { t } = useTranslation();
+  let navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = data => {
+    console.log("data => ", data);
+    console.log("errors => ", errors);
+    navigate("/player");
+  };
+
+  React.useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   return (
     <main>
-      <form className="w-1/3 mx-auto">
+      <form className="w-1/3 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.title-label")} />
           <TextField
-            name="title"
             type="text"
+            register={register("title", { required: true })}
             placeholder={t("app.createboard.title-placeholder")}
           />
+          {errors.title && (
+            <TextFieldError content={"This field is required"} />
+          )}
         </div>
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.discription-label")} />
@@ -28,8 +58,8 @@ export default function CreateBoard() {
             content={t("app.createboard.discription-discription")}
           />
           <TextField
-            name="title"
             type="textarea"
+            register={register("discription")}
             placeholder={t("app.createboard.discription-placeholder")}
           />
         </div>
@@ -41,22 +71,25 @@ export default function CreateBoard() {
             content={t("app.createboard.number-of-players-discription")}
           />
           <TextField
-            name="title"
             type="number"
+            register={register("players", {
+              required: true,
+              min: 1,
+              max: 1000,
+            })}
             placeholder={t("app.createboard.number-of-players-placeholder")}
           />
         </div>
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.unit-label")} />
           <TextField
-            name="title"
             type="text"
+            register={register("unit")}
             placeholder={t("app.createboard.unit-placeholder")}
           />
         </div>
         <div className="mt-10 mb-20">
           <Button
-            link={"/player"}
             onClick={e => {
               console.log(e);
             }}
