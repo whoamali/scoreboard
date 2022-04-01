@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "tailwindcss": "npx tailwindcss -o ./src/assets/css/app.css --watch",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "jsonserver": "json-server jsonserver/db.json --routes jsonserver/routes.json --port 3001"
   },
   "license": "MIT",
   "dependencies": {
