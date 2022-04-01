@@ -1,11 +1,13 @@
 import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux'
-import { createBoard } from '../../slice/boardSlice'
+import { useDispatch } from "react-redux";
+import { createBoard } from "../../slice/boardSlice";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { Alert } from "../../components";
 import {
   TextField,
   TextFieldTitle,
@@ -14,16 +16,30 @@ import {
   TextFieldError,
 } from "./components";
 
-type Inputs = {
+interface Inputs {
   title: string;
   discription: string | undefined;
   players: number;
   unit: string;
+}
+
+interface Error {
+  show: boolean;
+  type: "error" | "warning" | "info" | undefined;
+  message: string | undefined;
+}
+
+const initialAlert: Error = {
+  show: false,
+  type: undefined,
+  message: undefined,
 };
 
 export default function CreateBoard() {
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [alert, setAlert] = React.useState<Error>(initialAlert);
   const { t } = useTranslation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const {
     register,
@@ -31,14 +47,39 @@ export default function CreateBoard() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = data => {
+  React.useEffect(() => {
+    setTimeout(() => {
+      setAlert(initialAlert);
+    }, 20000);
+  }, [alert]);
+
+  const onSubmit: SubmitHandler<Inputs> = async data => {
     console.log("data => ", data);
-    dispatch(createBoard(data))
-    navigate("/player");
+    setLoading(true);
+    try {
+      const response = await axios.post("http://localhost:3001/api/create", {
+        ...data,
+      });
+
+      if (response) {
+        console.log(response)
+        dispatch(createBoard(data));
+        setLoading(false);
+        navigate(`/admin/${response.data.key}`);
+      }
+    } catch (err) {
+      setLoading(false);
+      setAlert({
+        show: true,
+        message: `${err}. check your network connection or peport to us`,
+        type: "error",
+      });
+    }
   };
 
   return (
     <main>
+      <Alert show={alert.show} message={alert.message} type={alert.type} />
       <form className="w-1/3 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.title-label")} />
@@ -48,7 +89,9 @@ export default function CreateBoard() {
             placeholder={t("app.createboard.title-placeholder")}
           />
           {errors.title && (
-            <TextFieldError content={t("app.createboard.title-required-error")} />
+            <TextFieldError
+              content={t("app.createboard.title-required-error")}
+            />
           )}
         </div>
         <div className="my-5">
@@ -90,12 +133,15 @@ export default function CreateBoard() {
         <div className="mt-10 mb-20">
           <Button
             onClick={e => {
-              console.log(e);
+              console.log("POST...");
             }}
           >
             <>
-              {t("app.createboard.button-label")}{" "}
-              <FontAwesomeIcon icon={faAngleRight} />
+              {loading ? (
+                <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+              ) : (
+                <>{t("app.createboard.button-label")} </>
+              )}
             </>
           </Button>
         </div>
