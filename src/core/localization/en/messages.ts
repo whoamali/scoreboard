@@ -23,6 +23,6 @@ export default {
     "app.createboard.number-of-players-placeholder": "number",
     "app.createboard.unit-label": "score unit",
     "app.createboard.unit-placeholder": "e.g. $ , 🏅 , 🧉",
-    "app.createboard.button-label": "add players",
+    "app.createboard.button-label": "create board",
   },
 };
