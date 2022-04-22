@@ -5,7 +5,7 @@ interface IProps {
   content: string;
 }
 
-export default function TextFieldDiscription({ content }: IProps) {
+export default function TextFieldDescription({ content }: IProps) {
   return (
     <p className="flex items-center">
       <span className="text-gray-500 mr-1 h-5">
