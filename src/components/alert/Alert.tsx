@@ -1,7 +1,7 @@
 interface IPropd {
   show: boolean;
   type: "error" | "warning" | "info" | undefined;
-  message: string | undefined;
+  message: string | JSX.Element | JSX.Element[] | undefined;
 }
 
 export default function Alert({ message, type, show }: IPropd) {
