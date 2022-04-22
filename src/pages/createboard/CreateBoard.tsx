@@ -4,22 +4,22 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createBoard } from "../../slice/boardSlice";
-import axios from "axios";
+import { axiosIns } from "./../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Alert } from "../../components";
 import {
   TextField,
   TextFieldTitle,
-  TextFieldDiscription,
+  TextFieldDescription,
   Button,
   TextFieldError,
 } from "./components";
 
 interface Inputs {
   title: string;
-  discription: string | undefined;
-  players: number;
+  description: string | undefined;
+  players_number: number;
   unit: string;
 }
 
@@ -57,15 +57,19 @@ export default function CreateBoard() {
     console.log("data => ", data);
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3001/api/create", {
+      const response = await axiosIns.post("/create", {
         ...data,
       });
 
       if (response) {
-        console.log(response)
-        dispatch(createBoard(data));
+        dispatch(
+          createBoard({
+            id: response.data.key,
+            ...data,
+          }),
+        );
         setLoading(false);
-        navigate(`/admin/${response.data.key}`);
+        navigate(`/boardadmin/${response.data.key}`);
       }
     } catch (err) {
       setLoading(false);
@@ -95,31 +99,33 @@ export default function CreateBoard() {
           )}
         </div>
         <div className="my-5">
-          <TextFieldTitle content={t("app.createboard.discription-label")} />
-          <TextFieldDiscription
-            content={t("app.createboard.discription-discription")}
+          <TextFieldTitle content={t("app.createboard.description-label")} />
+          <TextFieldDescription
+            content={t("app.createboard.description-description")}
           />
           <TextField
             type="textarea"
-            register={register("discription")}
-            placeholder={t("app.createboard.discription-placeholder")}
+            register={register("description")}
+            placeholder={t("app.createboard.description-placeholder")}
           />
         </div>
         <div className="my-5">
           <TextFieldTitle
-            content={t("app.createboard.number-of-players-label")}
+            content={t("app.createboard.number-of-players_number-label")}
           />
-          <TextFieldDiscription
-            content={t("app.createboard.number-of-players-discription")}
+          <TextFieldDescription
+            content={t("app.createboard.number-of-players_number-description")}
           />
           <TextField
             type="number"
-            register={register("players", {
+            register={register("players_number", {
               required: true,
               min: 1,
               max: 1000,
             })}
-            placeholder={t("app.createboard.number-of-players-placeholder")}
+            placeholder={t(
+              "app.createboard.number-of-players_number-placeholder",
+            )}
           />
         </div>
         <div className="my-5">

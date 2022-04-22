@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface BoardState {
+  id: number | undefined;
   title: string;
-  discription: string | undefined;
-  players: number;
-  unit: string;
+  description: string | undefined;
+  players_number: number;
+  unit: string | undefined;
 }
 
 const initialState: BoardState = {
+  id: undefined,
   title: "",
-  discription: "",
-  players: 10,
-  unit: "",
+  description: undefined,
+  players_number: 10,
+  unit: undefined,
 };
 
 export const boardSlice = createSlice({
