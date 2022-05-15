@@ -71,7 +71,7 @@ export default function Board() {
                   <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>
                 <span className="text-red-800">
-                  {t("app.board.user-key-required-error")}
+                  {t("app.createboard.title-required-error")}
                 </span>
               </p>
             )}

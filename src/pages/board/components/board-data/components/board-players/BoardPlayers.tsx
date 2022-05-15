@@ -26,8 +26,6 @@ export default function BoardPlayers({ players, unit }: IProps) {
     ?.sort((a, b) => {
       if (order == undefined) return 1;
       else if (order == "most") {
-        console.log("a", a);
-        console.log("b", b);
         if (a.score > b.score) return -1;
         if (a.score < b.score) return 1;
         return 0;
@@ -57,6 +55,7 @@ export default function BoardPlayers({ players, unit }: IProps) {
         />
         <select
           className="w-[170px] h-[50px] ml-7 bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+          value={order}
           onChange={e => {
             setOrder(
               e.target.value === "most"
@@ -67,7 +66,7 @@ export default function BoardPlayers({ players, unit }: IProps) {
             );
           }}
         >
-          <option selected>{t("app.board.board-player.order")}</option>
+          <option value="order">{t("app.board.board-player.order")}</option>
           <option value="most">{t("app.board.board-player.order.most")}</option>
           <option value="least">
             {t("app.board.board-player.order.least")}

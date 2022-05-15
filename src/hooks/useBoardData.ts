@@ -27,7 +27,6 @@ export default function useBoardData() {
       params: {
         user_key,
       },
-      baseURL: "http://localhost:3001",
     });
     setBoardData(res.data);
   };
