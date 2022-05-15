@@ -22,4 +22,18 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #a0aec0;
 }
+
 //! Scrollbar style end
+
+//! Number inputs arrow style start
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+//! Number inputs arrow style start
