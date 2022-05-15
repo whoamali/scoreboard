@@ -54,7 +54,6 @@ export default function CreateBoard() {
   }, [alert]);
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    console.log("data => ", data);
     setLoading(true);
     try {
       const response = await axiosIns.post("/create", {
@@ -75,7 +74,7 @@ export default function CreateBoard() {
       setLoading(false);
       setAlert({
         show: true,
-        message: `${err}. check your network connection or peport to us`,
+        message: `${err}. check your network connection or report to us`,
         type: "error",
       });
     }
@@ -84,7 +83,7 @@ export default function CreateBoard() {
   return (
     <main>
       <Alert show={alert.show} message={alert.message} type={alert.type} />
-      <form className="w-1/3 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-1/3 mx-auto">
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.title-label")} />
           <TextField
@@ -137,11 +136,7 @@ export default function CreateBoard() {
           />
         </div>
         <div className="mt-10 mb-20">
-          <Button
-            onClick={e => {
-              console.log("POST...");
-            }}
-          >
+          <Button onClick={handleSubmit(onSubmit)}>
             <>
               {loading ? (
                 <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
@@ -151,7 +146,7 @@ export default function CreateBoard() {
             </>
           </Button>
         </div>
-      </form>
+      </div>
     </main>
   );
 }
