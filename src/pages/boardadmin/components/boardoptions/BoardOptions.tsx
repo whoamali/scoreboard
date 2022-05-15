@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { Field, Label } from "./components";
 import { axiosIns } from "./../../../../utils";
@@ -14,10 +15,11 @@ interface Input {
   unit: string;
 }
 
-export default function BoardOptions({adminKey}: IProps) {
-  const [boardOption, setBoardOption] = React.useState<Input>()
+export default function BoardOptions({ adminKey }: IProps) {
+  const [boardOption, setBoardOption] = React.useState<Input>();
   const { register, handleSubmit } = useForm<Input>();
   const [dataChanged, setDataChanged] = React.useState(false);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     axiosIns
@@ -40,7 +42,7 @@ export default function BoardOptions({adminKey}: IProps) {
   return (
     <>
       <div className="flex flex-col mb-4">
-        <Label>{"Title"}</Label>
+        <Label>{t("app.createboard.title-label")}</Label>
         <Field
           defaultValue={boardOption?.title}
           type="text"
@@ -54,21 +56,22 @@ export default function BoardOptions({adminKey}: IProps) {
         />
       </div>
       <div className="flex flex-col mb-4">
-        <Label>{"Description"}</Label>
+        <Label>{t("app.createboard.description-placeholder")}</Label>
         <Field
           defaultValue={boardOption?.description}
           type="textarea"
           register={register("description", {
             required: true,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value === boardOption?.description) setDataChanged(false);
+              if (e.target.value === boardOption?.description)
+                setDataChanged(false);
               else setDataChanged(true);
             },
           })}
         />
       </div>
       <div className="flex flex-col mb-4">
-        <Label>{"Score Unit"}</Label>
+        <Label>{t("app.createboard.unit-label")}</Label>
         <Field
           defaultValue={boardOption?.unit}
           type="text"
@@ -90,7 +93,7 @@ export default function BoardOptions({adminKey}: IProps) {
         disabled={!dataChanged}
         onClick={handleSubmit(onSubmit)}
       >
-        Save
+        {t("app.save")}
       </button>
     </>
   );

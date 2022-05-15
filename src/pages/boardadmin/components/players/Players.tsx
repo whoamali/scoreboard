@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Player } from "./components";
 import { axiosIns } from "./../../../../utils";
+import { t } from "i18next";
 
 interface IProps {
   adminKey: string;
@@ -13,12 +14,11 @@ interface Players {
     | undefined;
 }
 
-// export default function Players({ players }: IProps) {
 export default function Players({ adminKey }: IProps) {
   const [players, setPlayers] = React.useState<Players["players"]>();
   const [search, setSearch] = React.useState<string>("");
-  const [order, setOrder] = React.useState<"most" | "least" | undefined>(
-    undefined,
+  const [order, setOrder] = React.useState<"most" | "least" | "order" | undefined>(
+    "order",
   );
   const [editable, setEditable] = React.useState<string>("");
 
@@ -90,9 +90,9 @@ export default function Players({ adminKey }: IProps) {
               );
             }}
           >
-            <option value="order">{"Order"}</option>
-            <option value="most">{"Most"}</option>
-            <option value="least">{"least"}</option>
+            <option value="order">{t("app.board.board-player.order")}</option>
+            <option value="most">{t("app.board.board-player.order.most")}</option>
+            <option value="least">{t("app.board.board-player.order.least")}</option>
           </select>
         </div>
 

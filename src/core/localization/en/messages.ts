@@ -3,6 +3,8 @@ export default {
     "app.score": "score",
     "app.board": "board",
     "app.create": "create",
+    "app.save": "save",
+    "app.cancel": "cancel",
 
     "app.home.title.online": "online",
     "app.home.title.free": "free",
@@ -26,7 +28,6 @@ export default {
     "app.createboard.button-label": "create board",
 
     "app.board.user-key-placeholder": "Enter your user key or board id",
-    "app.board.user-key-required-error": "this field is required",
     "app.board.user-key-button-label": "go",
     "app.board.alert-error-message": "connection error",
 
@@ -35,5 +36,13 @@ export default {
     "app.board.board-player.order.most": "most",
     "app.board.board-player.order.least": "least",
     "app.board.board-player.table.name": "name",
+
+    "app.boardadmin.admin-key-placeholder": "Enter your admin key",
+    "app.boardadmin.alert-error-message": "connection error",
+    "app.boardadmin.board-data.division.board-options": "board options",
+    "app.boardadmin.board-data.division.players": "players",
+    "app.boardadmin.board-data.admin-options": "admin options",
+    "app.boardadmin.players.player.edit": "edit player",
+    
   },
 };

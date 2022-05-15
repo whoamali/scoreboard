@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 import { axiosIns } from "../../../../../utils";
 
@@ -27,9 +28,10 @@ export default function Player({
   const [nameState, setName] = React.useState<string | null>(name);
   const [scoreState, setScore] = React.useState<number>(score);
   const [edited, setEdited] = React.useState(false);
+  const { t } = useTranslation();
 
   const onSave = React.useCallback(async (): Promise<void> => {
-    const response  = await axiosIns.post("/editplayer", {
+    const response = await axiosIns.post("/editplayer", {
       player_id,
       name: nameState,
       score: scoreState,
@@ -55,7 +57,9 @@ export default function Player({
       }}
     >
       <div className="flex items-center justify-between">
-        <div>{editable ? "Edit player" : nameState}</div>
+        <div>
+          {editable ? t("app.boardadmin.players.player.edit") : nameState}
+        </div>
         {editable ? (
           <FontAwesomeIcon
             icon={faTrashAlt}
@@ -70,7 +74,9 @@ export default function Player({
       {editable && (
         <div className="mt-4 mb-2">
           <div className="flex w-full px-3 py-2">
-            <label>Name: </label>
+            <label className="capitalize">
+              {t("app.board.board-player.table.name")}:{" "}
+            </label>
             <input
               className="flex-1 ml-1 rounded px-1"
               type="text"
@@ -82,7 +88,7 @@ export default function Player({
             />
           </div>
           <div className="flex w-full px-3 py-2">
-            <label>Score: </label>
+            <label className="capitalize">{t("app.score")}: </label>
             <div className="flex items-center justify-center flex-1">
               <button
                 className="bg-orange-400 text-white w-7 mr-1 rounded-sm"
@@ -171,7 +177,7 @@ export default function Player({
               onClick={() => onSave()}
               disabled={!edited}
             >
-              {"Save"}
+              {t("app.save")}
             </button>
             <button
               className="w-[45%] text-center transition text-slate-900 border border-slate-900 hover:text-white hover:border-slate-900 hover:bg-slate-900 rounded"
@@ -179,7 +185,7 @@ export default function Player({
                 setEditable("");
               }}
             >
-              {"Cancel"}
+              {t("app.cancel")}
             </button>
           </div>
         </div>

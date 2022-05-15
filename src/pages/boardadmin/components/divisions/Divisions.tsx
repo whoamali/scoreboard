@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { Division } from "./components";
 
 interface IProps {
@@ -11,6 +13,8 @@ export default function Divisions({
   divisionsState,
   setDivisionsState,
 }: IProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <Division
@@ -18,21 +22,21 @@ export default function Divisions({
         name="board-options"
         setDivisionsState={setDivisionsState}
       >
-        {"Board Options"}
+        {t("app.boardadmin.board-data.division.board-options")}
       </Division>
       <Division
         active={divisionsState === "players"}
         name="players"
         setDivisionsState={setDivisionsState}
       >
-        {"Players"}
+        {t("app.boardadmin.board-data.division.players")}
       </Division>
       <Division
         active={divisionsState === "admin-options"}
         name="admin-options"
         setDivisionsState={setDivisionsState}
       >
-        {"Admin Options"}
+        {t("app.boardadmin.board-data.admin-options")}
       </Division>
     </>
   );

@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { axiosIns } from "../../../utils";
 import { Divisions } from "./divisions";
 import { BoardOptions } from "./boardoptions";
 import { Players } from "./players";
