@@ -3879,12 +3879,16 @@ textarea.form-control.is-invalid {
   margin-bottom: 1.25rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mt-2 {
@@ -3983,16 +3987,24 @@ textarea.form-control.is-invalid {
   width: 700px;
 }
 
+.w-\[460px\] {
+  width: 460px;
+}
+
+.w-\[100px\] {
+  width: 100px;
+}
+
+.w-\[490px\] {
+  width: 490px;
+}
+
 .w-60 {
   width: 15rem;
 }
 
 .w-7 {
   width: 1.75rem;
-}
-
-.w-\[100px\] {
-  width: 100px;
 }
 
 .w-\[45\%\] {
@@ -4021,6 +4033,14 @@ textarea.form-control.is-invalid {
 
 .w-80 {
   width: 20rem;
+}
+
+.w-\[482px\] {
+  width: 482px;
+}
+
+.w-\[485px\] {
+  width: 485px;
 }
 
 .flex-1 {
@@ -4171,6 +4191,10 @@ textarea.form-control.is-invalid {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-transparent {
+  background-color: transparent;
 }
 
 .bg-slate-900 {
@@ -4420,6 +4444,11 @@ textarea.form-control.is-invalid {
 .hover\:bg-slate-900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-orange-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
 }
 
 .hover\:text-white:hover {

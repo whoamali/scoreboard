@@ -3,6 +3,7 @@ import * as React from "react";
 import { Divisions } from "./divisions";
 import { BoardOptions } from "./boardoptions";
 import { Players } from "./players";
+import { AdminOptions } from "./adminaoptions";
 
 interface IProps {
   adminKey: string;
@@ -30,6 +31,7 @@ export default function BoardData({ adminKey }: IProps) {
       <div className="ml-3 w-[600px]">
         {divisionsState === "board-options" && <BoardOptions adminKey={adminKey} />}
         {divisionsState === "players" && <Players adminKey={adminKey} />}
+        {divisionsState === "admin-options" && <AdminOptions adminKey={adminKey} />}
       </div>
     </section>
   );
