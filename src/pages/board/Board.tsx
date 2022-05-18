@@ -50,6 +50,7 @@ export default function Board() {
   return (
     <main>
       <Alert
+        position="left"
         message={t("app.board.alert-error-message")}
         show={fetchError?.hasError}
         type="error"

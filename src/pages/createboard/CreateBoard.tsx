@@ -82,7 +82,12 @@ export default function CreateBoard() {
 
   return (
     <main>
-      <Alert show={alert.show} message={alert.message} type={alert.type} />
+      <Alert
+        position="left"
+        show={alert.show}
+        message={alert.message}
+        type={alert.type}
+      />
       <div className="w-1/3 mx-auto">
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.title-label")} />

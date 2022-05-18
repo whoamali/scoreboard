@@ -38,6 +38,7 @@ export default function BoardData({
   return (
     <section className="flex flex-col items-center justify-start w-full h-[100vh]">
       <Alert
+        position="left"
         message={
           <a href="/createboard">
             {t("app.board.board-data.alert.create-message")}
