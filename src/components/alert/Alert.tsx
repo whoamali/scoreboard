@@ -2,9 +2,10 @@ interface IPropd {
   show: boolean;
   type: "error" | "warning" | "info" | undefined;
   message: string | JSX.Element | JSX.Element[] | undefined;
+  position: "left" | "right";
 }
 
-export default function Alert({ message, type, show }: IPropd) {
+export default function Alert({ position, message, type, show }: IPropd) {
   let typeColor = undefined;
 
   if (type === "error") {
@@ -19,7 +20,7 @@ export default function Alert({ message, type, show }: IPropd) {
     <>
       {show && (
         <div
-          className={`absolute left-2 top-5 w-80 py-2 px-3 rounded-md capitalize font-Fredoka text-white ${typeColor}`}
+          className={`absolute ${position}-2 top-5 w-80 py-2 px-3 rounded-md capitalize font-Fredoka text-white ${typeColor}`}
         >
           {message}
         </div>
