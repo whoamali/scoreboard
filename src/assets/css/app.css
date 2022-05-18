@@ -3811,12 +3811,16 @@ textarea.form-control.is-invalid {
   top: 0px;
 }
 
-.left-2 {
-  left: 0.5rem;
+.right-2 {
+  right: 0.5rem;
 }
 
 .top-5 {
   top: 1.25rem;
+}
+
+.left-2 {
+  left: 0.5rem;
 }
 
 .mx-auto {
@@ -3987,16 +3991,12 @@ textarea.form-control.is-invalid {
   width: 700px;
 }
 
-.w-\[460px\] {
-  width: 460px;
+.w-\[485px\] {
+  width: 485px;
 }
 
 .w-\[100px\] {
   width: 100px;
-}
-
-.w-\[490px\] {
-  width: 490px;
 }
 
 .w-60 {
@@ -4033,14 +4033,6 @@ textarea.form-control.is-invalid {
 
 .w-80 {
   width: 20rem;
-}
-
-.w-\[482px\] {
-  width: 482px;
-}
-
-.w-\[485px\] {
-  width: 485px;
 }
 
 .flex-1 {
