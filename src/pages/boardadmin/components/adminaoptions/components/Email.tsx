@@ -31,7 +31,7 @@ export default function Email({ adminKey, email }: IProps) {
       </div>
       <Description
         content={
-          "you can not be afraid of losing your admin key by entering your email!"
+          "do not be afraid to lose your adminkey by entering your email!"
         }
       />
     </>
