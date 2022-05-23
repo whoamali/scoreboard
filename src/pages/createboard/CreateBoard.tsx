@@ -2,8 +2,8 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { createBoard } from "../../slice/boardSlice";
+// import { useDispatch } from "react-redux";
+// import { createBoard } from "../../slice/boardSlice";
 import { axiosIns } from "./../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +19,7 @@ import {
 interface Inputs {
   title: string;
   description: string | undefined;
-  players_number: number;
+  player_number: number;
   unit: string;
 }
 
@@ -39,7 +39,7 @@ export default function CreateBoard() {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<Error>(initialAlert);
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   let navigate = useNavigate();
   const {
     register,
@@ -56,19 +56,19 @@ export default function CreateBoard() {
   const onSubmit: SubmitHandler<Inputs> = async data => {
     setLoading(true);
     try {
-      const response = await axiosIns.post("/create", {
+      const response = await axiosIns.post("/create/post", {
         ...data,
       });
 
       if (response) {
-        dispatch(
-          createBoard({
-            id: response.data.key,
-            ...data,
-          }),
-        );
+        // dispatch(
+        //   createBoard({
+        //     id: response.data.key,
+        //     ...data,
+        //   }),
+        // );
         setLoading(false);
-        navigate(`/boardadmin/${response.data.key}`);
+        navigate(`/boardadmin/${response.data.admin_key}`);
       }
     } catch (err) {
       setLoading(false);
@@ -122,7 +122,7 @@ export default function CreateBoard() {
           />
           <TextField
             type="number"
-            register={register("players_number", {
+            register={register("player_number", {
               required: true,
               min: 1,
               max: 1000,
