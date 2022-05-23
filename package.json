@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "tailwindcss": "npx tailwindcss -o ./src/assets/css/app.css --watch",
+    "tailwindcss": "npx tailwindcss -o ./src/assets/css/app.css --minify --watch",
     "preview": "vite preview",
     "jsonserver": "json-server jsonserver/db.json --routes jsonserver/routes.json --port 3001"
   },
