@@ -1,0 +1,57 @@
+import * as React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useForm } from "react-hook-form";
+
+interface Data {
+  name: string;
+  score: number;
+}
+
+export default function AddPlayer() {
+  const [enable, setEnable] = React.useState<boolean>(false);
+  const { register, handleSubmit } = useForm<Data>();
+
+  return (
+    <div
+      className={`transition-all ${
+        !enable
+          ? "w-[60px] flex items-center justify-center bg-orange-600 cursor-pointer"
+          : "w-[560px] bg-white border-2 border-slate-900"
+      } h-[60px] absolute bottom-5 right-5 rounded-lg px-1`}
+      onClick={() => {
+        if (!enable) {
+          setEnable(true);
+        }
+      }}
+    >
+      {!enable ? (
+        <FontAwesomeIcon icon={faPlus} fontSize={32} color="white" />
+      ) : (
+        <div className="w-full h-full flex justify-around items-center">
+          <input
+            type="text"
+            className="w-[310px] h-[40px] bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+            {...register("name", { required: true })}
+          />
+          <input
+            type="number"
+            className="w-[65px] text-center h-[40px] bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+            {...register("score", { required: true })}
+          />
+          <button className="border-orange-600 bg-orange-600 text-white text-center rounded h-[40px] w-14">
+            {"add"}
+          </button>
+          <button
+            className="text-center transition text-slate-900 border border-slate-900 hover:text-white hover:border-slate-900 hover:bg-slate-900 rounded h-[40px] w-14"
+            onClick={() => {
+              setEnable(false);
+            }}
+          >
+            {"cancel"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -58,7 +58,7 @@ export default function BoardData({ adminKey }: IProps) {
             setDivisionsState={handleDivisionsState}
           />
         </div>
-        <div className="ml-3 w-[600px]">
+        <div className="ml-3 w-[600px] relative">
           {divisionsState === "board-options" && (
             <BoardOptions adminKey={adminKey} />
           )}

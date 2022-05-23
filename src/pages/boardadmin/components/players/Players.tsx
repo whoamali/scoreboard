@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Player } from "./components";
+import { Player, AddPlayer } from "./components";
 import { axiosIns } from "./../../../../utils";
 import { t } from "i18next";
 
@@ -17,9 +17,9 @@ interface Players {
 export default function Players({ adminKey }: IProps) {
   const [players, setPlayers] = React.useState<Players["players"]>();
   const [search, setSearch] = React.useState<string>("");
-  const [order, setOrder] = React.useState<"most" | "least" | "order" | undefined>(
-    "order",
-  );
+  const [order, setOrder] = React.useState<
+    "most" | "least" | "order" | undefined
+  >("order");
   const [editable, setEditable] = React.useState<string>("");
 
   React.useEffect(() => {
@@ -66,38 +66,39 @@ export default function Players({ adminKey }: IProps) {
     ));
 
   return (
-    <>
-      <div className="flex flex-col rounded-md h-[800px] overflow-x-auto px-2 bg-gray-50">
-        <div className="sticky top-0 py-4">
-          <input
-            className="w-9/12 mr-1 h-[50px] p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
-            type="text"
-            placeholder={"find the player..."}
-            onChange={e =>
-              setSearch(e.target.value.toLowerCase().replace(/\s/g, ""))
-            }
-          />
-          <select
-            className="w-2/12 ml-1 h-[50px] bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
-            value={order}
-            onChange={e => {
-              setOrder(
-                e.target.value === "most"
-                  ? "most"
-                  : e.target.value === "least"
-                  ? "least"
-                  : undefined,
-              );
-            }}
-          >
-            <option value="order">{t("app.board.board-player.order")}</option>
-            <option value="most">{t("app.board.board-player.order.most")}</option>
-            <option value="least">{t("app.board.board-player.order.least")}</option>
-          </select>
-        </div>
-
-        <div>{filteredPlayers}</div>
+    <div className="flex flex-col rounded-md h-[800px] overflow-x-auto px-2 bg-gray-50">
+      <div className="sticky top-0 py-4">
+        <input
+          className="w-9/12 mr-1 h-[50px] p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+          type="text"
+          placeholder={"find the player..."}
+          onChange={e =>
+            setSearch(e.target.value.toLowerCase().replace(/\s/g, ""))
+          }
+        />
+        <select
+          className="w-2/12 ml-1 h-[50px] bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+          value={order}
+          onChange={e => {
+            setOrder(
+              e.target.value === "most"
+                ? "most"
+                : e.target.value === "least"
+                ? "least"
+                : undefined,
+            );
+          }}
+        >
+          <option value="order">{t("app.board.board-player.order")}</option>
+          <option value="most">{t("app.board.board-player.order.most")}</option>
+          <option value="least">
+            {t("app.board.board-player.order.least")}
+          </option>
+        </select>
       </div>
-    </>
+
+      <div>{filteredPlayers}</div>
+      <AddPlayer />
+    </div>
   );
 }
