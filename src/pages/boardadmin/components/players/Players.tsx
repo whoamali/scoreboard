@@ -24,9 +24,9 @@ export default function Players({ adminKey }: IProps) {
 
   React.useEffect(() => {
     axiosIns
-      .get("/boardplayers", {
+      .get("/admin/get/players", {
         params: {
-          adminKey,
+          admin_key: adminKey,
         },
       })
       .then(res => {
@@ -56,6 +56,7 @@ export default function Players({ adminKey }: IProps) {
     ?.filter(e => e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search))
     ?.map((e, index) => (
       <Player
+        adminKey={adminKey}
         key={e.player_id}
         player_id={e.player_id}
         name={e.name}

@@ -23,9 +23,9 @@ export default function BoardOptions({ adminKey }: IProps) {
 
   React.useEffect(() => {
     axiosIns
-      .get("/boardoption", {
+      .get("/admin/get/board_options", {
         params: {
-          adminKey,
+          admin_key: adminKey,
         },
       })
       .then(res => {
@@ -37,7 +37,16 @@ export default function BoardOptions({ adminKey }: IProps) {
     console.log(boardOption);
   }, [boardOption]);
 
-  const onSubmit = (data: Input) => console.log(data);
+  const onSubmit = (data: Input) => {
+    axiosIns
+      .post("/admin/post/board_options", {
+        ...data,
+        admin_key: adminKey,
+      })
+      .then(res => {
+        setBoardOption(res.data);
+      });
+  };
 
   return (
     <>

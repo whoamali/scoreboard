@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { BoardId, Email } from "./components";
+import { BoardId, Email, CreateAt } from "./components";
 import { axiosIns } from "./../../../../utils";
 
 interface IProps {
@@ -8,8 +8,9 @@ interface IProps {
 }
 
 interface Data {
-  board_username: string;
-  email: string;
+  user_key: string;
+  email: string | null;
+  create_date: string;
 }
 
 export default function AdminOptions({ adminKey }: IProps) {
@@ -17,9 +18,9 @@ export default function AdminOptions({ adminKey }: IProps) {
 
   React.useEffect(() => {
     axiosIns
-      .get("/boardadminoption", {
+      .get("/admin/get/admin_options", {
         params: {
-          adminKey,
+          admin_key: adminKey,
         },
       })
       .then(res => {
@@ -34,7 +35,8 @@ export default function AdminOptions({ adminKey }: IProps) {
   return (
     <>
       <Email adminKey={adminKey} email={data?.email} />
-      <BoardId adminKey={adminKey} username={data?.board_username} />
+      <BoardId adminKey={adminKey} username={data?.user_key} />
+      <CreateAt date={data?.create_date} />
     </>
   );
 }

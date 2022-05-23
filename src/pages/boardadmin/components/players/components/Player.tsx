@@ -11,6 +11,7 @@ interface Inputs {
 }
 
 interface IProps {
+  adminKey: string;
   player_id: string;
   name: string | null;
   score: number;
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 export default function Player({
+  adminKey,
   player_id,
   name,
   score,
@@ -31,7 +33,8 @@ export default function Player({
   const { t } = useTranslation();
 
   const onSave = React.useCallback(async (): Promise<void> => {
-    const response = await axiosIns.post("/editplayer", {
+    const response = await axiosIns.post("/admin/post/player", {
+      admin_key: adminKey,
       player_id,
       name: nameState,
       score: scoreState,
