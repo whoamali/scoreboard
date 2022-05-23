@@ -17,13 +17,14 @@ interface Data {
         },
       ]
     | undefined;
+  create_date: string;
 }
 
 export default function useBoardData() {
   const [boardData, setBoardData] = React.useState<Data>();
 
   const fetchData = async ({ user_key }: FetchDataProps): Promise<void> => {
-    const res = await axiosIns.get("/board", {
+    const res = await axiosIns.get("/board/get", {
       params: {
         user_key,
       },

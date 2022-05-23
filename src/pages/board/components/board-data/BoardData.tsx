@@ -16,6 +16,7 @@ interface IProps {
         },
       ]
     | undefined;
+  createAt: string | undefined;
 }
 
 export default function BoardData({
@@ -23,6 +24,7 @@ export default function BoardData({
   description,
   unit,
   players,
+  createAt,
 }: IProps) {
   const [showAlert, setAlert] = useState<boolean>(false);
   const { t } = useTranslation();
@@ -50,6 +52,11 @@ export default function BoardData({
       <BoardTitle title={title} />
       <BoardDescription description={description} />
       <BoardPlayers players={players} unit={unit} />
+      <p className="mt-10 text-gray-500 font-Fredoka text-base text-center">
+        {t("app.boardadmin.admin-options.createAt")}
+        <br />
+        {createAt}
+      </p>
     </section>
   );
 }

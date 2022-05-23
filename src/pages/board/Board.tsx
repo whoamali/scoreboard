@@ -41,7 +41,7 @@ export default function Board() {
 
   React.useEffect(() => {
     if (user_key !== undefined) {
-      fetchData({ user_key: user_key }).catch(err => {
+      fetchData({ user_key }).catch(err => {
         setFetchError({ hasError: true, message: err });
       });
     }
@@ -94,6 +94,7 @@ export default function Board() {
           description={boardData?.description}
           unit={boardData?.unit}
           players={boardData?.players}
+          createAt={boardData?.create_date}
         />
       )}
     </main>
