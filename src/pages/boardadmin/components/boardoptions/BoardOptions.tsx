@@ -16,35 +16,49 @@ interface Input {
 }
 
 export default function BoardOptions({ adminKey }: IProps) {
-  const [boardOption, setBoardOption] = React.useState<Input>();
-  const { register, handleSubmit } = useForm<Input>();
+  const [boardOption, setBoardOption] = React.useState<Input>({
+    title: "",
+    description: "",
+    unit: "",
+  });
+  const { register, handleSubmit, watch } = useForm<Input>();
   const [dataChanged, setDataChanged] = React.useState(false);
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    axiosIns
-      .get("/admin/get/board_options", {
-        params: {
-          admin_key: adminKey,
-        },
-      })
-      .then(res => {
-        setBoardOption(res.data);
-      });
+    axiosIns.get(`/admin/get/board_options/${adminKey}`).then(res => {
+      console.log("get", res.data.data);
+      setBoardOption(res.data.data);
+    });
   }, []);
-
-  React.useEffect(() => {
-    console.log(boardOption);
-  }, [boardOption]);
 
   const onSubmit = (data: Input) => {
     axiosIns
       .post("/admin/post/board_options", {
-        ...data,
+        ...{
+          title: data.title === "" ? boardOption.title : data.title,
+          description:
+            data.description === ""
+              ? boardOption.description
+              : data.description,
+          unit: data.unit === "" ? boardOption.unit : data.unit,
+        },
         admin_key: adminKey,
       })
       .then(res => {
-        setBoardOption(res.data);
+        if (res.data.success) {
+          setBoardOption(preBoardOption => {
+            return {
+              title: data.title === "" ? preBoardOption.title : data.title,
+              description:
+                data.description === ""
+                  ? preBoardOption.description
+                  : data.description,
+              unit: data.unit === "" ? preBoardOption.unit : data.unit,
+            };
+          });
+          setDataChanged(false);
+        }
       });
   };
 
@@ -53,12 +67,12 @@ export default function BoardOptions({ adminKey }: IProps) {
       <div className="flex flex-col mb-4">
         <Label>{t("app.createboard.title-label")}</Label>
         <Field
-          defaultValue={boardOption?.title}
+          defaultValue={boardOption.title}
           type="text"
           register={register("title", {
-            required: true,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value === boardOption?.title) setDataChanged(false);
+              if (e.target.value === boardOption.title || e.target.value === "")
+                setDataChanged(false);
               else setDataChanged(true);
             },
           })}
@@ -67,12 +81,14 @@ export default function BoardOptions({ adminKey }: IProps) {
       <div className="flex flex-col mb-4">
         <Label>{t("app.createboard.description-placeholder")}</Label>
         <Field
-          defaultValue={boardOption?.description}
+          defaultValue={boardOption.description}
           type="textarea"
           register={register("description", {
-            required: true,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value === boardOption?.description)
+              if (
+                e.target.value === boardOption.description ||
+                e.target.value === ""
+              )
                 setDataChanged(false);
               else setDataChanged(true);
             },
@@ -82,12 +98,12 @@ export default function BoardOptions({ adminKey }: IProps) {
       <div className="flex flex-col mb-4">
         <Label>{t("app.createboard.unit-label")}</Label>
         <Field
-          defaultValue={boardOption?.unit}
+          defaultValue={boardOption.unit}
           type="text"
           register={register("unit", {
-            required: true,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value === boardOption?.unit) setDataChanged(false);
+              if (e.target.value === boardOption.unit || e.target.value === "")
+                setDataChanged(false);
               else setDataChanged(true);
             },
           })}

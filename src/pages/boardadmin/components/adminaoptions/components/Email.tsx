@@ -6,35 +6,29 @@ import { axiosIns } from "../../../../../utils";
 
 interface IProps {
   adminKey: string;
-  email: string | null | undefined;
+  email: string | undefined;
 }
 
 export default function Email({ adminKey, email }: IProps) {
-  const [emailState, setEmailState] = useState<IProps["email"]>(email);
   const { register, handleSubmit } = useForm<{ email: string }>();
 
   const submit = (data: { email: string }) => {
-    axiosIns
-      .post("/admin/post/email", {
-        admin_key: adminKey,
-        email: data.email,
-      })
-      .then(res => {
-        setEmailState(data.email);
-      });
+    axiosIns.post("/admin/post/email", {
+      admin_key: adminKey,
+      email: data.email,
+    });
   };
 
   return (
     <>
       <div className="flex items-center justify-between mt-3">
         <input
-          type="text"
+          type="email"
           className="w-[485px] h-[50px] p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
-          defaultValue={emailState ?? ""}
-          placeholder={emailState ? "" : "Enter your email"}
+          defaultValue={email}
+          placeholder={email ? "" : "Enter your email"}
           {...register("email", {
             required: true,
-            value: emailState ?? undefined,
           })}
         />
         <button

@@ -7,7 +7,8 @@ interface IProps {
   players:
     | [
         {
-          name: string | undefined;
+          player_id: number;
+          name: string | undefined | null;
           score: number;
         },
       ]
@@ -22,6 +23,8 @@ export default function BoardPlayers({ players, unit }: IProps) {
   );
   const { t } = useTranslation();
 
+  console.log(players);
+
   const filteredPlayers = players
     ?.sort((a, b) => {
       if (order == undefined) return 1;
@@ -32,15 +35,24 @@ export default function BoardPlayers({ players, unit }: IProps) {
       }
       return a.score - b.score;
     })
-    ?.filter(e => e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search))
-    ?.map((e, index) => (
-      <BoardPlayersRow
-        key={`${index}${e.name}`}
-        index={index}
-        player={e}
-        unit={unit}
-      />
-    ));
+    ?.filter(e => {
+      console.log("filter", e);
+      console.log(e.name?.toLowerCase());
+      console.log(e.name?.toLowerCase()?.replace(/\s/g, ""));
+      console.log(e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search));
+      return e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search);
+    })
+    ?.map((e, index) => {
+      console.log("map", e);
+      return (
+        <BoardPlayersRow
+          key={`${index}${e.name}${e.player_id}`}
+          index={index}
+          player={e}
+          unit={unit}
+        />
+      );
+    });
 
   return (
     <div className="w-[800px] h-[550px] overflow-y-auto overflow-x-hidden p-5 pt-0 rounded bg-gray-50">

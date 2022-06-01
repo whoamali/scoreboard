@@ -9,7 +9,7 @@ interface IProps {
 
 interface Data {
   user_key: string;
-  email: string | null;
+  email: string;
   create_date: string;
 }
 
@@ -17,15 +17,10 @@ export default function AdminOptions({ adminKey }: IProps) {
   const [data, setData] = React.useState<Data>();
 
   React.useEffect(() => {
-    axiosIns
-      .get("/admin/get/admin_options", {
-        params: {
-          admin_key: adminKey,
-        },
-      })
-      .then(res => {
-        setData(res.data);
-      });
+    axiosIns.get(`/admin/get/admin_options/${adminKey}`).then(res => {
+      console.log(res);
+      setData(res.data.data);
+    });
   }, []);
 
   React.useEffect(() => {

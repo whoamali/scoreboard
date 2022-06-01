@@ -1,7 +1,8 @@
 interface IProps {
   index: number;
   player: {
-    name: string | undefined;
+    player_id: number;
+    name: string | undefined | null;
     score: number;
   };
   unit: string | undefined;

@@ -2,8 +2,6 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { createBoard } from "../../slice/boardSlice";
 import { axiosIns } from "./../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -39,7 +37,6 @@ export default function CreateBoard() {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<Error>(initialAlert);
   const { t } = useTranslation();
-  // const dispatch = useDispatch();
   let navigate = useNavigate();
   const {
     register,
@@ -61,14 +58,8 @@ export default function CreateBoard() {
       });
 
       if (response) {
-        // dispatch(
-        //   createBoard({
-        //     id: response.data.key,
-        //     ...data,
-        //   }),
-        // );
         setLoading(false);
-        navigate(`/boardadmin/${response.data.admin_key}`);
+        navigate(`/boardadmin/${response.data.data.admin_key}`);
       }
     } catch (err) {
       setLoading(false);

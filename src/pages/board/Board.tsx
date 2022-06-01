@@ -6,10 +6,9 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { useBoardData } from "./../../hooks";
 import { Alert } from "./../../components";
-
 import { BoardData } from "./components";
+import { axiosIns } from "../../utils";
 
 interface Inputs {
   user_key: string;
@@ -20,13 +19,29 @@ interface FetchError {
   message: unknown;
 }
 
+interface Data {
+  title: string;
+  description: string | undefined;
+  unit: string | undefined;
+  players:
+    | [
+        {
+          player_id: number;
+          name: string | undefined | null;
+          score: number;
+        },
+      ]
+    | undefined;
+  create_date: string;
+}
+
 export default function Board() {
   const [fetchError, setFetchError] = React.useState<FetchError>({
     hasError: false,
     message: "",
   });
+  const [boardData, setBoardData] = React.useState<Data>();
   const { user_key } = useParams();
-  const { fetchData, boardData } = useBoardData();
   const navigate = useNavigate();
   const {
     register,
@@ -35,17 +50,17 @@ export default function Board() {
   } = useForm<Inputs>();
   const { t } = useTranslation();
 
-  const onClick: SubmitHandler<Inputs> = React.useCallback(data => {
-    navigate(data.user_key);
-  }, []);
-
   React.useEffect(() => {
-    if (user_key !== undefined) {
-      fetchData({ user_key }).catch(err => {
-        setFetchError({ hasError: true, message: err });
+    if (user_key) {
+      axiosIns.get(`/board/${user_key}`).then(res => {
+        setBoardData(res.data.data);
       });
     }
   }, [user_key]);
+
+  const onClick: SubmitHandler<Inputs> = React.useCallback(data => {
+    navigate(data.user_key);
+  }, []);
 
   return (
     <main>

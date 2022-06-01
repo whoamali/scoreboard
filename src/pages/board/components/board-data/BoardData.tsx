@@ -11,7 +11,8 @@ interface IProps {
   players:
     | [
         {
-          name: string | undefined;
+          player_id: number
+          name: string | undefined | null;
           score: number;
         },
       ]

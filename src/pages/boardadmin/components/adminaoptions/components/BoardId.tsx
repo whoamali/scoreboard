@@ -22,7 +22,7 @@ export default function BoardId({ adminKey, username }: IProps) {
         user_key: data.username,
       })
       .then(res => {
-        setKeyValidation(res.data.status);
+        setKeyValidation(res.data.success);
       });
   };
 

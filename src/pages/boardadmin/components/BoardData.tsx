@@ -18,10 +18,10 @@ export default function BoardData({ adminKey }: IProps) {
   >("board-options");
 
   React.useEffect(() => {
-    axiosIns.get("/boardadminoption", { params: { adminKey } }).then(res => {
+    axiosIns.get(`/admin/get/admin_options/${adminKey}`).then(res => {
       if (divisionsState !== "admin-options") {
         setTimeout(() => {
-          setEmailEmpty(res.data.email === null);
+          setEmailEmpty(res.data.data.email === null);
         }, 1500);
       }
     });
