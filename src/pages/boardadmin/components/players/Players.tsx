@@ -24,14 +24,9 @@ export default function Players({ adminKey }: IProps) {
 
   React.useEffect(() => {
     axiosIns.get(`/admin/get/players/${adminKey}`).then(res => {
-      console.log(res);
       setPlayers(res.data.data);
     });
   }, []);
-
-  React.useEffect(() => {
-    console.log(players);
-  }, [players]);
 
   const handlePlayerEditable = (id: string): void => {
     setEditable(id);

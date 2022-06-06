@@ -41,7 +41,6 @@ export default function Player({
       score: scoreState,
     });
     if (response) {
-      console.log("Saved: ", { player_id, name: nameState, score: scoreState });
       setEditable("");
       setEdited(false);
     }
@@ -53,11 +52,6 @@ export default function Player({
       player_id,
     });
     if (response) {
-      console.log("Deleted: ", {
-        player_id,
-        name: nameState,
-        score: scoreState,
-      });
       setEditable("");
       setEdited(false);
       setHide(true);

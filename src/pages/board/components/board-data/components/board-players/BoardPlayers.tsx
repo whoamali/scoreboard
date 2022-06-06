@@ -23,8 +23,6 @@ export default function BoardPlayers({ players, unit }: IProps) {
   );
   const { t } = useTranslation();
 
-  console.log(players);
-
   const filteredPlayers = players
     ?.sort((a, b) => {
       if (order == undefined) return 1;
@@ -36,14 +34,9 @@ export default function BoardPlayers({ players, unit }: IProps) {
       return a.score - b.score;
     })
     ?.filter(e => {
-      console.log("filter", e);
-      console.log(e.name?.toLowerCase());
-      console.log(e.name?.toLowerCase()?.replace(/\s/g, ""));
-      console.log(e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search));
       return e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search);
     })
     ?.map((e, index) => {
-      console.log("map", e);
       return (
         <BoardPlayersRow
           key={`${index}${e.name}${e.player_id}`}

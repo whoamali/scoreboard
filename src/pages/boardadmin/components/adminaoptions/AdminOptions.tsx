@@ -18,14 +18,9 @@ export default function AdminOptions({ adminKey }: IProps) {
 
   React.useEffect(() => {
     axiosIns.get(`/admin/get/admin_options/${adminKey}`).then(res => {
-      console.log(res);
       setData(res.data.data);
     });
   }, []);
-
-  React.useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <>

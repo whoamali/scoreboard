@@ -27,7 +27,6 @@ export default function BoardOptions({ adminKey }: IProps) {
 
   React.useEffect(() => {
     axiosIns.get(`/admin/get/board_options/${adminKey}`).then(res => {
-      console.log("get", res.data.data);
       setBoardOption(res.data.data);
     });
   }, []);
