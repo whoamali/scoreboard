@@ -23,7 +23,7 @@ export default function Players({ adminKey }: IProps) {
   const [editable, setEditable] = React.useState<string>("");
 
   React.useEffect(() => {
-    axiosIns.get("/admin/get/players/${adminKey}").then(res => {
+    axiosIns.get(`/admin/get/players/${adminKey}`).then(res => {
       console.log(res);
       setPlayers(res.data.data);
     });
