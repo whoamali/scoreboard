@@ -72,14 +72,14 @@ export default function CreateBoard() {
   };
 
   return (
-    <main>
+    <main className="cflex centered cflex-col">
       <Alert
         position="left"
         show={alert.show}
         message={alert.message}
         type={alert.type}
       />
-      <div className="w-1/3 mx-auto">
+      <div className="c-8 c-md-9 c-lg-5 c-xl-4 c-xxl-3 c-xxxl-2">
         <div className="my-5">
           <TextFieldTitle content={t("app.createboard.title-label")} />
           <TextField
