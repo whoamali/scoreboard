@@ -7,6 +7,7 @@ import "./core/localization";
 
 import App from "./pages/App";
 
+import "./assets/css/cflex.min.css"
 import "./assets/css/app.css";
 import "./assets/scss/app.scss";
 
