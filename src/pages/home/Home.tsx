@@ -8,29 +8,31 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <main className="w-full h-[100vh] flex flex-col items-center justify-center">
+    <main className="cflex cflex-col centered h-[100vh]">
       <section className="w-[311px]">
         <Title />
       </section>
       <section className="my-7">
         <Typist />
       </section>
-      <section className="flex flex-row items-center justify-between w-[510px] h-[55px]">
-        <Button
-          link="/createboard"
-          className="border-2 border-orange-600 rounded-lg bg-orange-600 text-white font-normal text-xl font-Fredoka w-[240px] h-full"
-        >
-          <>
-            {t("app.create")} {t("app.board")}{" "}
-            <FontAwesomeIcon icon={faAngleRight} />
-          </>
-        </Button>
-        <Button
-          link="/us"
-          className="border-2 border-slate-900 rounded-lg text-slate-900 text-xl font-Fredoka w-[240px] h-full hover:bg-slate-900 hover:text-white transition"
-        >
-          {t("app.home.button.about-us")}
-        </Button>
+      <section className="c-10 h-[55px]">
+        <div className="cflex cflex-col cflex-row-lg centered">
+          <Button
+            link="/createboard"
+            className="border-2 border-orange-600 rounded-lg bg-orange-600 text-white font-normal text-xl font-Fredoka mb-2 c-8 cm-lg-3 cm-xl-2 cm-xxxl-1 h-[55px]"
+          >
+            <>
+              {t("app.create")} {t("app.board")}{" "}
+              <FontAwesomeIcon icon={faAngleRight} />
+            </>
+          </Button>
+          <Button
+            link="/us"
+            className="border-2 border-slate-900 rounded-lg text-slate-900 text-xl font-Fredoka mb-2 c-8 cm-lg-3 cm-xl-2 cm-xxxl-1 h-[55px] hover:bg-slate-900 hover:text-white transition"
+          >
+            {t("app.home.button.about-us")}
+          </Button>
+        </div>
       </section>
     </main>
   );
