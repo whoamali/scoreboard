@@ -31,15 +31,22 @@ export default function BoardData({
   const { t } = useTranslation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const showTimer = setTimeout(() => {
       setAlert(true);
     }, 4000);
 
-    return () => clearTimeout(timer);
+    const hideTimer = setTimeout(() => {
+      setAlert(false);
+    }, 8000);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-start w-full h-[100vh]">
+    <section className="cflex cflex-col cflex-nowrap centered h-[100vh]">
       <Alert
         position="left"
         message={

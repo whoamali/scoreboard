@@ -48,10 +48,10 @@ export default function BoardPlayers({ players, unit }: IProps) {
     });
 
   return (
-    <div className="w-[800px] h-[550px] overflow-y-auto overflow-x-hidden p-5 pt-0 rounded bg-gray-50">
-      <div className="sticky top-0 py-4">
+    <div className="c-10 c-lg-8 c-xl-7 c-xxl-5 h-[550px] overflow-y-auto overflow-x-hidden p-5 pt-0 rounded bg-gray-50">
+      <div className="cflex sticky top-0 py-4">
         <input
-          className="w-[480px] h-[50px] ml-9 p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+          className="c-7 h-[50px] p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
           type="text"
           placeholder={"find the player..."}
           onChange={e =>
@@ -59,7 +59,7 @@ export default function BoardPlayers({ players, unit }: IProps) {
           }
         />
         <select
-          className="w-[170px] h-[50px] ml-7 bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
+          className="c-2 off-1 h-[50px] bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
           value={order}
           onChange={e => {
             setOrder(
