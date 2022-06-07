@@ -51,14 +51,16 @@ export default function BoardData({ adminKey }: IProps) {
           </a>
         }
       />
-      <section className="w-2/3 mx-auto flex justify-start items-start pt-5">
-        <div className="flex flex-col mr-3">
-          <Divisions
-            divisionsState={divisionsState}
-            setDivisionsState={handleDivisionsState}
-          />
+      <section className="cflex pt-5 justify-center">
+        <div className="c-10 c-lg-7 c-xl-3 c-xxl-2">
+          <div className="cflex centered">
+            <Divisions
+              divisionsState={divisionsState}
+              setDivisionsState={handleDivisionsState}
+            />
+          </div>
         </div>
-        <div className="ml-3 w-[600px] relative">
+        <div className="c-9 c-lg-6 c-xl-4">
           {divisionsState === "board-options" && (
             <BoardOptions adminKey={adminKey} />
           )}

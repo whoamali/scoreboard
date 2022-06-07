@@ -23,10 +23,10 @@ export default function AdminOptions({ adminKey }: IProps) {
   }, []);
 
   return (
-    <>
+    <div className="cflex centered cflex-col">
       <Email adminKey={adminKey} email={data?.email} />
       <BoardId adminKey={adminKey} username={data?.user_key} />
       <CreateAt date={data?.create_date} />
-    </>
+    </div>
   );
 }

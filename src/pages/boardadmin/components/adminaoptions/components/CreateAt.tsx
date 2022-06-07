@@ -6,11 +6,13 @@ interface IProps {
 
 export default function CreateAt({ date }: IProps) {
   const { t } = useTranslation();
+  const dateConst = new Date(date !== undefined ? date : "");
+
   return (
-    <p className="mt-12 text-gray-500 font-Fredoka text-base text-center">
+    <p className="c-10 mt-12 text-gray-500 font-Fredoka text-base text-center">
       {t("app.boardadmin.admin-options.createAt")}
       <br />
-      {date}
+      {dateConst.toLocaleDateString()}
     </p>
   );
 }
