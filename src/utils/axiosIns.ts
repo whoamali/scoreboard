@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://scorboard.ir/api",
+  baseURL: "/api",
 });
