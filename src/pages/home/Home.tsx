@@ -1,11 +1,20 @@
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 
 import { Title, Typist, Button } from "./components";
 
-export default function Home() {
+interface IProps {
+  title: string;
+}
+
+export default function Home({ title }: IProps) {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    document.title = title || "";
+  }, []);
 
   return (
     <main className="cflex cflex-col centered h-[100vh]">

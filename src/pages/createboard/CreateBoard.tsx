@@ -14,6 +14,10 @@ import {
   TextFieldError,
 } from "./components";
 
+interface IProps {
+  title: string;
+}
+
 interface Inputs {
   title: string;
   description: string | undefined;
@@ -33,7 +37,7 @@ const initialAlert: Error = {
   message: undefined,
 };
 
-export default function CreateBoard() {
+export default function CreateBoard({ title }: IProps) {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<Error>(initialAlert);
   const { t } = useTranslation();
@@ -43,6 +47,10 @@ export default function CreateBoard() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  React.useEffect(() => {
+    document.title = title || "";
+  }, []);
 
   React.useEffect(() => {
     setTimeout(() => {

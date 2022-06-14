@@ -31,6 +31,10 @@ export default function BoardAdmin() {
   } = useForm<Inputs>();
   const { t } = useTranslation();
 
+  React.useEffect(() => {
+    document.title = "BoardAdmin";
+  }, []);
+
   const onClick: SubmitHandler<Inputs> = React.useCallback(data => {
     navigate(data.admin_key);
   }, []);

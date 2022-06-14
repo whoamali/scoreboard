@@ -51,6 +51,10 @@ export default function Board() {
   const { t } = useTranslation();
 
   React.useEffect(() => {
+    document.title = boardData?.title || "";
+  }, [boardData]);
+
+  React.useEffect(() => {
     if (user_key) {
       axiosIns.get(`/board/${user_key}`).then(res => {
         setBoardData(res.data.data);

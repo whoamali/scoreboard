@@ -8,8 +8,8 @@ import { BoardAdmin } from "./boardadmin";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="createboard" element={<CreateBoard />} />
+      <Route path="/" element={<Home title="ScoreBoard" />} />
+      <Route path="createboard" element={<CreateBoard title="CreateBoard" />} />
       <Route path="board" element={<Board />}>
         <Route path=":user_key" />
       </Route>
