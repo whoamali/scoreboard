@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 import Description from "./Description";
 import { axiosIns } from "../../../../../utils";
@@ -13,9 +15,12 @@ interface IProps {
 
 export default function BoardId({ adminKey, username }: IProps) {
   const [keyValidation, setKeyValidation] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const { register, handleSubmit } = useForm<{ username: string }>();
+  const { t } = useTranslation();
 
   const submit = (data: { username: string }) => {
+    setLoading(true);
     axiosIns
       .post("/admin/post/user_key", {
         admin_key: adminKey,
@@ -23,6 +28,7 @@ export default function BoardId({ adminKey, username }: IProps) {
       })
       .then(res => {
         setKeyValidation(res.data.success);
+        setLoading(false);
       });
   };
 
@@ -37,10 +43,14 @@ export default function BoardId({ adminKey, username }: IProps) {
           {...register("username", { required: true })}
         />
         <button
-          className="c-2 h-[50px] ml-2 border-2 transition border-orange-600 rounded-md bg-transparent text-orange-600 hover:bg-orange-600 hover:text-white font-normal text-xl font-Fredoka"
+          className="c-2 h-[50px] ml-2 border-2 transition border-orange-600 rounded-md bg-transparent text-orange-600 hover:bg-orange-600 hover:text-white font-normal text-xl capitalize font-Fredoka"
           onClick={handleSubmit(submit)}
         >
-          {"check"}
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+          ) : (
+            t("app.check")
+          )}
         </button>
       </div>
       {!keyValidation && (

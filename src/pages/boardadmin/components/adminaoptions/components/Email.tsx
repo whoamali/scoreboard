@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 import Description from "./Description";
 import { axiosIns } from "../../../../../utils";
@@ -10,13 +13,24 @@ interface IProps {
 }
 
 export default function Email({ adminKey, email }: IProps) {
+  const [loading, setLoading] = useState<boolean>(false);
   const { register, handleSubmit } = useForm<{ email: string }>();
+  const { t } = useTranslation();
 
   const submit = (data: { email: string }) => {
-    axiosIns.post("/admin/post/email", {
-      admin_key: adminKey,
-      email: data.email,
-    });
+    setLoading(true);
+    axiosIns
+      .post("/admin/post/email", {
+        admin_key: adminKey,
+        email: data.email,
+      })
+      .then(res => {
+        res.data.data.success && setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   return (
@@ -32,17 +46,17 @@ export default function Email({ adminKey, email }: IProps) {
           })}
         />
         <button
-          className="c-2 h-[50px] ml-2 border-2 transition border-orange-600 rounded-md bg-transparent text-orange-600 hover:bg-orange-600 hover:text-white font-normal text-xl font-Fredoka"
+          className="c-2 h-[50px] ml-2 border-2 transition border-orange-600 rounded-md bg-transparent text-orange-600 hover:bg-orange-600 hover:text-white font-normal text-xl capitalize font-Fredoka"
           onClick={handleSubmit(submit)}
         >
-          {"send"}
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+          ) : (
+            t("app.save")
+          )}
         </button>
       </div>
-      <Description
-        content={
-          "do not be afraid to lose your adminkey by entering your email!"
-        }
-      />
+      <Description content={t("app.boardadmin.admin-options.email.message")} />
     </div>
   );
 }

@@ -4,6 +4,7 @@ export default {
     "app.board": "board",
     "app.create": "create",
     "app.save": "save",
+    "app.check": "check",
     "app.cancel": "cancel",
 
     "app.home.title.online": "online",
@@ -31,7 +32,8 @@ export default {
     "app.board.user-key-button-label": "go",
     "app.board.alert-error-message": "connection error",
 
-    "app.board.board-data.alert.create-message": "you can create your own scoreboard! click to create",
+    "app.board.board-data.alert.create-message":
+      "you can create your own scoreboard! click to create",
     "app.board.board-player.order": "order",
     "app.board.board-player.order.most": "most",
     "app.board.board-player.order.least": "least",
@@ -44,6 +46,8 @@ export default {
     "app.boardadmin.board-data.admin-options": "admin options",
     "app.boardadmin.players.player.edit": "edit player",
     "app.boardadmin.admin-options.createAt": "Create at",
-    
+
+    "app.boardadmin.admin-options.email.message": "do not be afraid to lose your adminkey by entering your email!",
+    "app.boardadmin.admin-options.boardid.message": "you can choose a usename for your board!",
   },
 };

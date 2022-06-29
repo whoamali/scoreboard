@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { Field, Label } from "./components";
 import { axiosIns } from "./../../../../utils";
@@ -23,6 +25,7 @@ export default function BoardOptions({ adminKey }: IProps) {
   });
   const { register, handleSubmit, watch } = useForm<Input>();
   const [dataChanged, setDataChanged] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const { t } = useTranslation();
 
   React.useEffect(() => {
@@ -32,6 +35,7 @@ export default function BoardOptions({ adminKey }: IProps) {
   }, []);
 
   const onSubmit = (data: Input) => {
+    setLoading(true);
     axiosIns
       .post("/admin/post/board_options", {
         ...{
@@ -58,6 +62,7 @@ export default function BoardOptions({ adminKey }: IProps) {
           });
           setDataChanged(false);
         }
+        setLoading(false);
       });
   };
 
@@ -117,7 +122,11 @@ export default function BoardOptions({ adminKey }: IProps) {
         disabled={!dataChanged}
         onClick={handleSubmit(onSubmit)}
       >
-        {t("app.save")}
+        {loading ? (
+          <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+        ) : (
+          t("app.save")
+        )}
       </button>
     </>
   );
