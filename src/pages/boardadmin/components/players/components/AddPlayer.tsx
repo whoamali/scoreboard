@@ -3,14 +3,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 
+import { axiosIns } from "../../../../../utils";
+
+interface IProps {
+  adminKey: string;
+  addPlayer: (addingPlayer: {
+    player_id: string;
+    name: string | null;
+    score: number;
+  }) => void;
+}
+
 interface Data {
   name: string;
   score: number;
 }
 
-export default function AddPlayer() {
+export default function AddPlayer({ adminKey, addPlayer }: IProps) {
   const [enable, setEnable] = React.useState<boolean>(false);
   const { register, handleSubmit } = useForm<Data>();
+
+  const onSubmit = (data: Data) => {
+    axiosIns
+      .post("/admin/post/player", {
+        admin_key: adminKey,
+        ...data,
+      })
+      .then(res => {
+        addPlayer(res.data.data)
+        setEnable(false);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   return (
     <div
@@ -41,7 +67,10 @@ export default function AddPlayer() {
             className="w-[65px] text-center h-[40px] bg-white p-1 border-2 border-orange-300 rounded text-base transition focus:border-slate-900"
             {...register("score", { required: true })}
           />
-          <button className="border-orange-600 bg-orange-600 text-white text-center rounded h-[40px] w-14">
+          <button
+            className="border-orange-600 bg-orange-600 text-white text-center rounded h-[40px] w-14"
+            onClick={handleSubmit(onSubmit)}
+          >
             {"add"}
           </button>
           <button

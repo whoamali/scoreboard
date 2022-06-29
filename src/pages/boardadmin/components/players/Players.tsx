@@ -17,6 +17,7 @@ interface Players {
 export default function Players({ adminKey }: IProps) {
   const [players, setPlayers] = React.useState<Players["players"]>();
   const [search, setSearch] = React.useState<string>("");
+  const [addingPlayer, setAddingPlayer] = React.useState<boolean>(false);
   const [order, setOrder] = React.useState<
     "most" | "least" | "order" | undefined
   >("order");
@@ -32,28 +33,43 @@ export default function Players({ adminKey }: IProps) {
     setEditable(id);
   };
 
-  const filteredPlayers = players
-    ?.sort((a, b) => {
-      if (order == undefined) return 1;
-      else if (order == "most") {
-        if (a.score > b.score) return -1;
-        if (a.score < b.score) return 1;
-        return 0;
-      }
-      return a.score - b.score;
-    })
-    ?.filter(e => e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search))
-    ?.map((e, index) => (
-      <Player
-        adminKey={adminKey}
-        key={e.player_id}
-        player_id={e.player_id}
-        name={e.name}
-        score={e.score}
-        editable={editable === e.player_id}
-        setEditable={handlePlayerEditable}
-      />
-    ));
+  const addPlayer = (addingPlayer: {
+    player_id: string;
+    name: string | null;
+    score: number;
+  }) => {
+    setPlayers(prePlayer => {
+      const newPlayers = prePlayer;
+      newPlayers?.push(addingPlayer);
+      return newPlayers;
+    });
+    setAddingPlayer(preAddingPlayer => !preAddingPlayer);
+  };
+
+  const filteredPlayers = React.useCallback(() => {
+    return players
+      ?.sort((a, b) => {
+        if (order == undefined) return 1;
+        else if (order == "most") {
+          if (a.score > b.score) return -1;
+          if (a.score < b.score) return 1;
+          return 0;
+        }
+        return a.score - b.score;
+      })
+      ?.filter(e => e.name?.toLowerCase()?.replace(/\s/g, "")?.includes(search))
+      ?.map(e => (
+        <Player
+          adminKey={adminKey}
+          key={e.player_id}
+          player_id={e.player_id}
+          name={e.name}
+          score={e.score}
+          editable={editable === e.player_id}
+          setEditable={handlePlayerEditable}
+        />
+      ));
+  }, [players, order, search, addingPlayer, editable]);
 
   return (
     <div className="flex flex-col rounded-md h-[800px] overflow-x-auto px-2 bg-gray-50">
@@ -87,8 +103,8 @@ export default function Players({ adminKey }: IProps) {
         </select>
       </div>
 
-      <div>{filteredPlayers}</div>
-      <AddPlayer />
+      <div>{filteredPlayers()}</div>
+      <AddPlayer adminKey={adminKey} addPlayer={addPlayer} />
     </div>
   );
 }
