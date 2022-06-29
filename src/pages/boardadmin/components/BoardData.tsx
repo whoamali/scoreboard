@@ -57,6 +57,7 @@ export default function BoardData({ adminKey }: IProps) {
             <Divisions
               divisionsState={divisionsState}
               setDivisionsState={handleDivisionsState}
+              adminKey={adminKey}
             />
           </div>
         </div>

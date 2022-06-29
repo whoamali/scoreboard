@@ -44,6 +44,7 @@ export default {
     "app.boardadmin.board-data.division.board-options": "board options",
     "app.boardadmin.board-data.division.players": "players",
     "app.boardadmin.board-data.admin-options": "admin options",
+    "app.boardadmin.visit": "visit your board",
     "app.boardadmin.players.player.edit": "edit player",
     "app.boardadmin.admin-options.createAt": "Create at",
 
